@@ -1,7 +1,7 @@
 {
-    "name": "Deploy to Amazon EKS",
+    "name": "Deploy Java with Maven to Amazon EKS",
     "description": "Deploy a container to an Amazon EKS service powered by blue express.",
     "creator": "blue express",
     "iconName": "aws",
-    "categories": ["Deployment", "Dockerfile"]
+    "categories": ["Deployment", "Continuous integration", "Java" , "Dockerfile"]
 }
