@@ -1,7 +1,0 @@
-{
-  "name": "Blue Organization Workflow",
-  "description": "Octo Organization CI workflow template.",
-  "iconName": "example-icon",
-  "categories": ["Java"],
-  "filePatterns": ["package.json$", "^Dockerfile", ".*\\.md$"]
-}
