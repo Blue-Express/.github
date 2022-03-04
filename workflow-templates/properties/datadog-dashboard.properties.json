@@ -1,0 +1,7 @@
+{
+  "name": "Deploy Datadog Dashboard",
+  "description": "Deploy a Dashboard on Datadog service powered by blue express.",
+  "creator": "blue express",
+  "iconName": "datadog",
+  "categories": ["Deployment", "Continuous integration", "JSON"]
+}
