@@ -28,7 +28,7 @@ jobs:
     needs: push-img
     with:
       environment: ${{ github.ref_name }}
-      namespace: ns-labs
+      namespace: ns-name
       path-values: helm/values-${{ github.ref_name }}.yml
       base-path: /api/domain/v1
       liveness-path: /actuator/health
@@ -36,7 +36,7 @@ jobs:
       liveness-periodoSeconds: '10'
       liveness-timeoutSeconds: '20'
       ingress-enabled: true
-      ingress-groupname: igrz-labs
+      ingress-groupname: igrz-namespace
       cpu-base: '100m'
       memory-base: '128Mi'
       cpu-limit: '200m'
@@ -66,7 +66,7 @@ jobs:
       kong-plugins: '"jwt-keycloak" "key-auth" "cors"'
       kong-cors-origins: '"http://localhost:3000"'
       kong-cors-methods: '"GET", "POST", "DELETE", "PATCH", "PUT", "HEAD", "OPTIONS", "TRACE", "CONNECT"'
-      kong-jwt-allowed-iss: /auth/realms/universal-app
+      kong-jwt-allowed-iss: /auth/realms/name
     secrets:
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS  }}
       KONG_HOST: ${{ secrets.KONG_HOST }}
