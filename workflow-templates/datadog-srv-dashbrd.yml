@@ -16,7 +16,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     uses: Blue-Express/bx_templates/.github/workflows/dd-dashboard-srv.yml@blue
     with:
-      environment: ${{ github.ref_name }}
+      environment: ${{ github.event.workflow_run.head_branch }}
     secrets:
       DD_API_KEY: ${{ secrets.DD_API_KEY }}
       DD_APPLICATION_KEY: ${{ secrets.DD_APPLICATION_KEY }}
