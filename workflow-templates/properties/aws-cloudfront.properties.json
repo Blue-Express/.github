@@ -1,0 +1,7 @@
+{
+  "name": "Deploy AWS Cloudfront",
+  "description": "Deploy a WebSite on AWS Cloudfront powered by blue express.",
+  "creator": "blue express",
+  "iconName": "cloudfront",
+  "categories": ["Deployment", "Continuous integration", "HTML"]
+}
