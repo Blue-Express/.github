@@ -1,0 +1,7 @@
+{
+  "name": "Deploy init setup Environments",
+  "description": "Deploy a Environments on repository powered by blue express.",
+  "creator": "blue express",
+  "iconName": "github",
+  "categories": ["Deployment", "Continuous integration", "JSON"]
+}

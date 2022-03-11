@@ -1,0 +1,12 @@
+# This is a initial setup enmviroment.
+# You can delete this file once executed in your repository
+name: create-env-repo
+
+on:
+  push:
+    branches: ['*']
+  workflow_dispatch:
+
+jobs:
+  sync:
+    uses: Blue-Express/bx_templates/.github/workflows/tmpl-repo-sync-env.yml@blue
