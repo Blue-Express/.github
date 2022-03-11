@@ -8,5 +8,5 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync:
+  sync-env:
     uses: Blue-Express/bx_templates/.github/workflows/tmpl-repo-sync-env.yml@blue
