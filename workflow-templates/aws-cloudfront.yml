@@ -10,13 +10,13 @@ on:
 
 jobs:
   build:
-  uses: Blue-Express/bx_templates/.github/workflows/build-react.yml@blue
-  with:
-    path-values: values/.env.${{ github.ref_name }}
-    install-pkg: none #npm/yarn
-    build-path: html
-  secrets:
-    SECRETOS: ${{ toJSON(secrets) }}
+    uses: Blue-Express/bx_templates/.github/workflows/build-react.yml@blue
+    with:
+      path-values: values/.env.${{ github.ref_name }}
+      install-pkg: none #npm/yarn
+      build-path: html
+    secrets:
+      SECRETOS: ${{ toJSON(secrets) }}
 
   deploy:
     uses: Blue-Express/bx_templates/.github/workflows/deploy-cloudfront.yml@blue
