@@ -53,7 +53,7 @@ jobs:
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
 
 ### deploy consumer retry 01
-deploy-csmr01:
+  deploy-csmr01:
     uses: Blue-Express/bx_templates/.github/workflows/deploy-helm-java-api.yml@blue
     needs: push-img
     with:
@@ -82,7 +82,7 @@ deploy-csmr01:
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
 
 ### deploy consumer retry 02
-deploy-csmr02:
+  deploy-csmr02:
     uses: Blue-Express/bx_templates/.github/workflows/deploy-helm-java-api.yml@blue
     needs: push-img
     with:
