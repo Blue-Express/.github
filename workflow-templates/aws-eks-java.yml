@@ -64,7 +64,9 @@ jobs:
       kong-rts-path: '/api/domain/v1'
       kong-rts-methods: '"GET", "POST", "HEAD", "OPTIONS", "CONNECT"'
       kong-plugins: '"jwt-keycloak" "key-auth" "cors"'
-      kong-cors-origins: '"http://localhost:3000","https://localhost:3000"'
+      kong-cors-dev: '"http://localhost:3000","https://localhost:3000","https://dev.blue.cl"'
+      kong-cors-qa: '"http://qa.blue.cl","https://qa.blue.cl"'
+      kong-cors-prod: '"http://blue.cl","https://blue.cl"'
       kong-cors-methods: '"GET", "POST", "DELETE", "PATCH", "PUT", "HEAD", "OPTIONS", "TRACE", "CONNECT"'
       kong-jwt-allowed-iss: /auth/realms/name
     secrets:
