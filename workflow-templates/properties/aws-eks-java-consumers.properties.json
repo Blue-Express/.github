@@ -1,7 +1,0 @@
-{
-    "name": "Deploy Java Kafka Consumers to Amazon EKS",
-    "description": "Deploy a container Kafka Consumers to an Amazon EKS service powered by blue express.",
-    "creator": "blue express",
-    "iconName": "aws",
-    "categories": ["Deployment", "Continuous integration", "Maven" , "Java" , "Dockerfile"]
-}
