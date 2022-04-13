@@ -1,0 +1,7 @@
+{
+    "name": "Deploy Python API (Flask) on EKS",
+    "description": "Deploy Python API (Flask) on EKS. By Blue",
+    "creator": "blue express",
+    "iconName": "python",
+    "categories": ["Deployment", "Continuous integration", "python"]
+}
