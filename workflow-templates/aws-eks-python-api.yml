@@ -1,5 +1,5 @@
 name: Template - Python API on AWS EKS
-
+# Ejemplo de uso en https://github.com/Blue-Express/bx-srv-sample-python-ws
 on:
   push:
     branches: [development, staging, production]
