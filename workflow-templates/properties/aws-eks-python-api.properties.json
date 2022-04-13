@@ -1,6 +1,6 @@
 {
     "name": "Deploy Python API (Flask) on EKS",
-    "description": "Deploy Python API (Flask) on EKS. By Blue",
+    "description": "Deploy Python API (Flask) on EKS. Sample in: https://github.com/Blue-Express/bx-srv-sample-python-ws",
     "creator": "blue express",
     "iconName": "python",
     "categories": ["Deployment", "Continuous integration", "python"]
