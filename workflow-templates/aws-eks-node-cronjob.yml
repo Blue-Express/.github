@@ -1,4 +1,4 @@
-name: bx-cron-fulfillment-inventory-migrations
+name: you-name-here
 
 on:
 #  push:
@@ -27,7 +27,7 @@ jobs:
     with:
       schedule: '0 * * * *'
       environment: ${{ github.ref_name }}
-      namespace: ns-fulfillment # ns-{ nombre namespace }
+      namespace: ns-namespace # ns-{ nombre namespace }
       path-values: helm/values-${{ github.ref_name }}.yml
       success-history: '3'
       failed-history: '3'
