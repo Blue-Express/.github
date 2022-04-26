@@ -5,7 +5,7 @@ on:
     branches: [development, staging, production]
     paths-ignore:
       - '.github/**'
-
+    
   workflow_dispatch:
 
 jobs:
