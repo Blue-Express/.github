@@ -1,6 +1,6 @@
 {
     "name": "Deploy Python CronJob  to Amazon EKS",
-    "description": "Deploy a container CronJob to an Amazon EKS service powered by blue express.",
+    "description": "Deploy a container CronJob to an Amazon EKS service powered by blue express. Example: https://github.com/Blue-Express/bx-cron-cicd-poc-python",
     "creator": "blue express",
     "iconName": "python",
     "categories": ["Deployment", "Continuous integration", "Maven", "Python", "Dockerfile"]
