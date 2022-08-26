@@ -34,7 +34,7 @@ jobs:
       liveness-timeoutSeconds: '20'
       ingress-enabled: true
       ingress-groupname: ingrz-namespace
-      cpu-base: '100m'
+      cpu-base: '50m'
       memory-base: '128Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
