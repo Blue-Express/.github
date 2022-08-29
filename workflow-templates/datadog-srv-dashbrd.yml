@@ -6,7 +6,7 @@ on:
   #    - '.github/**'
 
   workflow_run:
-    workflows: [Template - JAVA/NodeJS on AWS EKS]
+    workflows: [Template - JAVA/NodeJS on AWS EKS]    # Reemplazar al correspondiente
     types: [completed]
 
   workflow_dispatch:
