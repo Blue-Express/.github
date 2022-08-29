@@ -4,7 +4,7 @@ on:
   push:
     branches: [development, staging, production]
     paths-ignore:
-      - '.github/**'
+      - '.github/workflows/**'
 
   workflow_dispatch:
 
@@ -32,7 +32,7 @@ jobs:
     with:
       schedule: '*/20 * * * *'
       environment: ${{ github.ref_name }}
-      namespace: ns-name
+      namespace: ns-name                              # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}.yml
       success-history: '3'
       failed-history: '3'
