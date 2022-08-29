@@ -2,6 +2,6 @@
     "name": "Deploy NodeJS CronJob  to Amazon EKS",
     "description": "Deploy a container CronJob to an Amazon EKS service powered by blue express.",
     "creator": "blue express",
-    "iconName": "aws",
+    "iconName": "node",
     "categories": ["Deployment", "Continuous integration", "Maven" , "Node" , "Dockerfile"]
 }
