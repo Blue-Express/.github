@@ -4,14 +4,37 @@ on:
   push:
     branches: [development, staging, production]
     paths-ignore:
-      - '.github/**'
+      - '.github/workflows/**'
 
   workflow_dispatch:
 
 jobs:
+  validate-oas:
+    runs-on: ubuntu-latest
+    container:
+      image: shesse/redoc-cli:1.0.1
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Validate open api spec (redoc CLI)
+        run: npx @redocly/cli lint oas/oas.yaml
+        
+  api-ui:
+    uses: Blue-Express/bx_templates/.github/workflows/build-api-ui.yaml@blue
+    needs: validate-oas
+    with:
+      environment: development #${{ github.ref_name }}
+      namespace: dev-ns-{namespace}                   # Cambiar segun corresponda
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID  }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY  }}
+      AWS_REGION: ${{ secrets.AWS_REGION  }}
+      AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
+      TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS }}
+
   build:
     uses: Blue-Express/bx_templates/.github/workflows/build-java.yml@blue
-
+    needs: api-ui
   push-img:
     uses: Blue-Express/bx_templates/.github/workflows/push-java.yml@blue
     needs: build
@@ -28,15 +51,15 @@ jobs:
     needs: push-img
     with:
       environment: ${{ github.ref_name }}
-      namespace: ns-name
+      namespace: ns-name                              # Reemplazar por el correspondiente
       path-values: helm/values-${{ github.ref_name }}.yml
-      base-path: /api/domain/v1
+      base-path: /api/domain/v1                       # Reemplazar
       liveness-path: /actuator/health
       liveness-initialDelay: '60'
       liveness-periodoSeconds: '10'
       liveness-timeoutSeconds: '20'
-      ingress-enabled: true
-      ingress-groupname: igrz-namespace
+      ingress-enabled: true                           # true (expuesto) - false (interno)
+      ingress-groupname: ingrz-namespace              # Reemplazar {namespace} por el {name} del NS
       cpu-base: '50m'
       memory-base: '128Mi'
       cpu-limit: '350m'
@@ -59,16 +82,16 @@ jobs:
       kong-srv-host: ${{ needs.deploy.outputs.ingress }}
       kong-srv-port: '80'
       kong-cnsr: 'front-cnsr'
-      kong-srv-path: '/api/domain/v1'
+      kong-srv-path: '/api/domain/v1'               # Reemplazar con el mismo del {base-path}
       kong-rts-protocol: '"http","https"'
-      kong-rts-path: '/api/domain/v1'
+      kong-rts-path: '/api/domain/v1'               # Reemplazar con el mismo del {kong-srv-path} (expuesta a inet)
       kong-rts-methods: '"GET", "POST", "HEAD", "OPTIONS", "CONNECT"'
       kong-plugins: '"jwt-keycloak" "key-auth" "cors"'
       kong-cors-dev: '"http://localhost:3000","https://localhost:3000","https://dev.blue.cl"'
       kong-cors-qa: '"http://qa.blue.cl","https://qa.blue.cl"'
       kong-cors-prod: '"http://blue.cl","https://blue.cl"'
       kong-cors-methods: '"GET", "POST", "DELETE", "PATCH", "PUT", "HEAD", "OPTIONS", "TRACE", "CONNECT"'
-      kong-jwt-allowed-iss: /auth/realms/name
+      kong-jwt-allowed-iss: '/auth/realms/name'     # Si se encuentra habilitado {kong-plugins:  '"jwt-keycloak"}, se debe definir.
     secrets:
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS  }}
       KONG_HOST: ${{ secrets.KONG_HOST }}
