@@ -27,7 +27,7 @@ jobs:
     with:
       schedule: '0 * * * *'
       environment: ${{ github.ref_name }}
-      namespace: ns-namespace # ns-{ nombre namespace }
+      namespace: ns-namespace                             # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}.yml
       success-history: '3'
       failed-history: '3'
