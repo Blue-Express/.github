@@ -2,6 +2,6 @@
     "name": "Nightly Artifacts Cleanup",
     "description": "Cleans artifacts generated during the day.",
     "creator": "blue express",
-    "iconName": "java",
+    "iconName": "github",
     "categories": ["Deployment", "Workflow", "Github" , "Dockerfile", "Artifact"]
 }
