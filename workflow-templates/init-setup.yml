@@ -6,8 +6,6 @@ on:
   push:
     branches: ['*']
   workflow_dispatch:
-    secrets:
-      TOKEN_REPO_TEMPLATE:
 
 jobs:
   sync-env:
