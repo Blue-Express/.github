@@ -9,8 +9,16 @@ on:
   workflow_dispatch:
 
 jobs:
+  sonar:
+    uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-java.yml@blue
+    secrets:
+      SONARQUBE_DEV_URL: ${{ secrets.SONARQUBE_DEV_URL }}
+      SONARQUBE_DEV_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN }}
+      TOKEN_REPO_TEMPLATE: ${{ secrets.TOKEN_REPO_TEMPLATE }}
+
   build-and-push-ecr:
     uses: Blue-Express/bx_templates/.github/workflows/push-python-ecr.yml@blue
+    needs: sonar
     with:
       environment: ${{ github.ref_name }}
     secrets:
