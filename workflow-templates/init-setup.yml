@@ -10,3 +10,5 @@ on:
 jobs:
   sync-env:
     uses: Blue-Express/bx_templates/.github/workflows/tmpl-repo-sync-env.yml@blue
+    secrets:
+      API_TOKEN_GITHUB: ${{ secrets.TOKEN_REPO_TEMPLATE }}
