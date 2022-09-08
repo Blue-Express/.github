@@ -32,9 +32,16 @@ jobs:
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS }}
 
+  sonar:
+    uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-java.yml@blue
+    secrets:
+      SONARQUBE_DEV_URL: ${{ secrets.SONARQUBE_DEV_URL }}
+      SONARQUBE_DEV_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN }}
+      TOKEN_REPO_TEMPLATE: ${{ secrets.TOKEN_REPO_TEMPLATE }}
+
   build:
     uses: Blue-Express/bx_templates/.github/workflows/build-and-push-nodejs.yml@blue
-    needs: api-ui
+    needs: [api-ui, sonar]
     with:
       install-pkg: 'npm'
       environment: ${{ github.ref_name }}
