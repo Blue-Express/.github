@@ -73,23 +73,20 @@ jobs:
       # Límite Recursos Default
       cpu-limit: '350m'
       memory-limit: '380Mi'
+      replicas: '1'
       # Límite Recursos Dev
       cpu-limit-dev: '350m'
       memory-limit-dev: '380Mi'
+      replicas-dev: '1'
       # Límite Recursos Qa
       cpu-limit-qa: '350m'
       memory-limit-qa: '380Mi'
+      replicas-qa: '1'
       # Límite Recursos Prod
       cpu-limit-prod: '350m'
       memory-limit-prod: '380Mi'
-      # Réplicas Default
-      replicas: '1'
-      # Réplicas Dev
-      replicas-dev: '1'
-      # Réplicas Qa
-      replicas-qa: '1'
-      # Réplicas Prod
       replicas-prod: '1'
+      
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
