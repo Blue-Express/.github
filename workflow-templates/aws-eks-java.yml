@@ -67,10 +67,26 @@ jobs:
       liveness-timeoutSeconds: '20'
       ingress-enabled: true                           # true (expuesto) - false (interno)
       ingress-groupname: ingrz-namespace              # Reemplazar {namespace} por el {name} del NS
+      # Recursos Base
       cpu-base: '50m'
       memory-base: '128Mi'
       cpu-limit: '350m'
       memory-limit: '380Mi'
+      # Límite Recursos DEV
+      cpu-limit-dev: '350m'
+      memory-limit-dev: '380Mi'
+      # Límite Recursos QA
+      cpu-limit-qa: '350m'
+      memory-limit-qa: '380Mi'
+      # Límite Recursos PROD
+      cpu-limit-prod: '350m'
+      memory-limit-prod: '380Mi'
+      # Réplicas DEV
+      replicas-dev: '1'
+      # Réplicas QA
+      replicas-qa: '1'
+      # Réplicas PROD
+      replicas-prod: '1'
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
