@@ -33,7 +33,8 @@ jobs:
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS }}
 
   sonar:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
+    needs: api-ui
     environment:
       name: "development"
       url: https://desa-sonar.bluex.cl/dashboard?id=${{ github.event.repository.name }}
