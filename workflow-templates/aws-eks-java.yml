@@ -34,7 +34,7 @@ jobs:
 
   sonar:
     uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-java.yml@blue
-    needs: api-ui
+    needs: validate-oas
     secrets:
       SONARQUBE_DEV_URL: ${{ secrets.SONARQUBE_DEV_URL }}
       SONARQUBE_DEV_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN }}
