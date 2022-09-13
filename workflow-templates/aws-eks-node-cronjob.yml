@@ -1,10 +1,10 @@
 name: you-name-here
 
 on:
-#  push:
-#    branches: [development, staging, production]
-#    paths-ignore:
-#      - '.github/**'
+  push:
+    branches: [development, staging, production]
+    paths-ignore:
+      - '.github/workflows/**'
 
   workflow_dispatch:
 
