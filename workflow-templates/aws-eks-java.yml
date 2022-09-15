@@ -68,23 +68,22 @@ jobs:
       liveness-timeoutSeconds: '20'
       ingress-enabled: true                           # true (expuesto) - false (interno)
       ingress-groupname: ingrz-namespace              # Reemplazar {namespace} por el {name} del NS
-      # Recursos Base
+      # Recursos Default
       cpu-base: '50m'
       memory-base: '128Mi'
-      # Límite Recursos Default
-      cpu-limit: '350m'
-      memory-limit: '380Mi'
+      cpu-limit: '500m'
+      memory-limit: '512Mi'
       replicas: '1'
       # Límite Recursos Dev
-      cpu-limit-dev: '350m'
-      memory-limit-dev: '380Mi'
+      cpu-limit-dev: '500m'
+      memory-limit-dev: '512Mi'
       replicas-dev: '1'
       # Límite Recursos Qa
-      cpu-limit-qa: '350m'
+      cpu-limit-qa: '200m'
       memory-limit-qa: '380Mi'
       replicas-qa: '1'
       # Límite Recursos Prod
-      cpu-limit-prod: '350m'
+      cpu-limit-prod: '200m'
       memory-limit-prod: '380Mi'
       replicas-prod: '1'
       
