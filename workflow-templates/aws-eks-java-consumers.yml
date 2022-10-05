@@ -58,7 +58,6 @@ jobs:
     with:
       suffix: -csmr00
       cert-path: true
-      replicas: '1'
       environment: ${{ github.ref_name }}
       namespace: ns-name
       path-values: helm/values-${{ github.ref_name }}-csmr00.yml
