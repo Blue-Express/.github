@@ -1,0 +1,7 @@
+{
+    "name": "Vercel Frontend",
+    "description": "Deploy Frontend in Vercel.",
+    "creator": "blue express",
+    "iconName": "vercel",
+    "categories": ["Deployment", "Continuous integration", "vercel"]
+}
