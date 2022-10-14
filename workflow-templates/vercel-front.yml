@@ -7,7 +7,7 @@ on:
       - '.github/workflows/**'
   workflow_call:
     inputs:
-      build_id:
+      project_id:
         required: true
         type: string
         default: 'prj_nRzTdFuXdjjnAbtc1r6JvNVGJhyM'
@@ -23,7 +23,7 @@ jobs:
       with:
         sonarqube_url: ${{ secrets.SONARQUBE_DEV_URL }}
         sonarqube_token: ${{ secrets.SONARQUBE_DEV_TOKEN }}
-        projectKey: bx-facturacion-react
+        projectKey: ${{ github.event.repository.name }}
 
   vercel:
     runs-on: ubuntu-latest
