@@ -15,7 +15,7 @@ jobs:
       name: "development"
       url: https://desa-sonar.bluex.cl/dashboard?id=${{ github.event.repository.name }}
     steps:      
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: SonarQube Scan
         uses: Blue-Express/sonar-scan-action@master
         
@@ -44,7 +44,7 @@ jobs:
     with:
       schedule: '0 * * * *'
       environment: ${{ github.ref_name }}
-      namespace: ns-namespace                             # Reemplazar al correspondiente
+      namespace: ns-namespace                               # Reemplazar {namespace} por el {name} del NS
       path-values: helm/values-${{ github.ref_name }}.yml
       success-history: '3'
       failed-history: '3'
