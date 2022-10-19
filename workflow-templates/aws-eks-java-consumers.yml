@@ -12,13 +12,14 @@ jobs:
   sonar:
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v2
+     - uses: actions/checkout@v3
      - name: Set up JDK 11
-       uses: actions/setup-java@v1
+       uses: actions/setup-java@v3
        with:
          java-version: '11' # The JDK version to make available on the path.
          java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
          architecture: x64
+         distribution: 'adopt'
      - name: Checkstyle
        run: mvn checkstyle:checkstyle -DskipTests
      - name: Sonarqube
@@ -59,7 +60,7 @@ jobs:
       suffix: -csmr00
       cert-path: true
       environment: ${{ github.ref_name }}
-      namespace: ns-name
+      namespace: ns-name                              # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr00.yml
       base-path: /api/domain/v1/csmr00
       liveness-path: /actuator/health
@@ -103,7 +104,7 @@ jobs:
       cert-path: true
       replicas: '1'
       environment: ${{ github.ref_name }}
-      namespace: ns-name
+      namespace: ns-name                              # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr01.yml
       base-path: /api/domain/v1/csmr01
       liveness-path: /actuator/health
@@ -132,7 +133,7 @@ jobs:
       cert-path: true
       replicas: '1'
       environment: ${{ github.ref_name }}
-      namespace: ns-name
+      namespace: ns-name                               # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr02.yml
       base-path: /api/domain/v1/csmr02
       liveness-path: /actuator/health
