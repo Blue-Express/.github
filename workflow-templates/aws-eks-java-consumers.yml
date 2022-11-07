@@ -58,11 +58,11 @@ jobs:
     needs: push-img
     with:
       suffix: -csmr00
-      cert-path: true
+#       cert-path: true
       environment: ${{ github.ref_name }}
       namespace: ns-name                              # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr00.yml
-      base-path: /api/domain/v1/csmr00
+      base-path: /api/domain/v1/csmr00                # Se debe definir de acuerdo al live path de la aplicación.
       liveness-path: /actuator/health
       liveness-initialDelay: '90'
       liveness-periodoSeconds: '60'
@@ -101,12 +101,12 @@ jobs:
     needs: push-img
     with:
       suffix: -csmr01
-      cert-path: true
+#       cert-path: true
       replicas: '1'
       environment: ${{ github.ref_name }}
       namespace: ns-name                              # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr01.yml
-      base-path: /api/domain/v1/csmr01
+      base-path: /api/domain/v1/csmr01                # Se debe definir de acuerdo al live path de la aplicación.
       liveness-path: /actuator/health
       liveness-initialDelay: '90'
       liveness-periodoSeconds: '60'
@@ -130,12 +130,12 @@ jobs:
     needs: push-img
     with:
       suffix: -csmr02
-      cert-path: true
+#       cert-path: true
       replicas: '1'
       environment: ${{ github.ref_name }}
       namespace: ns-name                               # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr02.yml
-      base-path: /api/domain/v1/csmr02
+      base-path: /api/domain/v1/csmr02                 # Se debe definir de acuerdo al live path de la aplicación.
       liveness-path: /actuator/health
       liveness-initialDelay: '90'
       liveness-periodoSeconds: '60'
