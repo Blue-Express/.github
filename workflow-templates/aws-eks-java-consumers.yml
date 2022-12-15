@@ -68,7 +68,7 @@ jobs:
       liveness-periodoSeconds: '60'
       liveness-timeoutSeconds: '20'
       # Recursos Base
-      cpu-base: '50m'
+      cpu-base: '30m'
       memory-base: '128Mi'
       # Límite Recursos Default
       cpu-limit: '350m'
@@ -111,7 +111,7 @@ jobs:
       liveness-initialDelay: '90'
       liveness-periodoSeconds: '60'
       liveness-timeoutSeconds: '20'
-      cpu-base: '100m'
+      cpu-base: '30m'
       memory-base: '128Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
@@ -140,7 +140,7 @@ jobs:
       liveness-initialDelay: '90'
       liveness-periodoSeconds: '60'
       liveness-timeoutSeconds: '20'
-      cpu-base: '100m'
+      cpu-base: '30m'
       memory-base: '128Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
