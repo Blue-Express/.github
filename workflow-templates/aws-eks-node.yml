@@ -76,7 +76,7 @@ jobs:
       ingress-enabled: true                           # true (expuesto) - false (interno)
       ingress-groupname: ingrz-namespace              # Reemplazar {namespace} por el {name} del NS
       # Recursos Default
-      cpu-base: '50m'
+      cpu-base: '30m'
       memory-base: '128Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
