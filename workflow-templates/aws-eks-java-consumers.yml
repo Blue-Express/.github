@@ -13,17 +13,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - uses: actions/checkout@v3
-     - name: Set up JDK 11
+     - name: Set up JDK 17
        uses: actions/setup-java@v3
        with:
-         java-version: '11' # The JDK version to make available on the path.
+         java-version: '17' # The JDK version to make available on the path.
          java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
          architecture: x64
-         distribution: 'adopt'
+         distribution: 'temurin'
      - name: Checkstyle
        run: mvn checkstyle:checkstyle -DskipTests
-     - name: Sonarqube
-       run: mvn verify sonar:sonar -DskipTests -Dsonar.host.url=${{ secrets.SONARQUBE_DEV_URL }} -Dsonar.login=${{ secrets.SONARQUBE_DEV_TOKEN }}
+     - name: SonarqubeV2
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+         SONAR_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN_V2 }}
+         SONAR_HOST_URL: ${{ secrets.SONARQUBE_DEV_URL_V2 }}
+       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ github.event.repository.name }}
      - name: Read value from Properties-file check Quality Gate
        id: read_property
        uses: christian-draeger/read-properties@1.0.1
@@ -35,10 +39,10 @@ jobs:
      - name: Show Github ref
        run: echo ${{ github.ref }}
      - name: Break Build Quality Gate
-       run: sh ./break_build.sh ${{ secrets.SONARQUBE_DEV_URL }} ${{ secrets.SONARQUBE_DEV_TOKEN }} ${{ steps.read_property.outputs.value }}
+       run: sh ./break_build.sh ${{ secrets.SONARQUBE_DEV_URL_V2 }} ${{ secrets.SONARQUBE_DEV_TOKEN_V2 }} ${{ steps.read_property.outputs.value }}
 
   build:
-    uses: Blue-Express/bx_templates/.github/workflows/build-java.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/build-java17.yml@blue
     needs: sonar
 
   push-img:
