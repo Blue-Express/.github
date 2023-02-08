@@ -67,7 +67,7 @@ jobs:
        run: sh ./break_build.sh ${{ secrets.SONARQUBE_DEV_URL_V2 }} ${{ secrets.SONARQUBE_DEV_TOKEN_V2 }} ${{ steps.read_property.outputs.value }}
 
   build:
-    uses: Blue-Express/bx_templates/.github/workflows/build-java.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/build-java17.yml@blue
     needs: [api-ui, sonar]
   push-img:
     uses: Blue-Express/bx_templates/.github/workflows/push-java.yml@blue
