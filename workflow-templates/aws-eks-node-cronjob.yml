@@ -10,10 +10,10 @@ on:
 
 jobs:
   sonar:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     environment:
       name: "development"
-      url: https://desa-sonar.bluex.cl/dashboard?id=${{ github.event.repository.name }}
+      url: https://sonarqube.infra.blue.cl/dashboard?id=${{ github.event.repository.name }}
     steps:      
       - uses: actions/checkout@v3
       - name: SonarQube Scan
@@ -21,8 +21,8 @@ jobs:
         
         id: check
         with:
-          sonarqube_url: ${{ secrets.SONARQUBE_DEV_URL }}
-          sonarqube_token: ${{ secrets.SONARQUBE_DEV_TOKEN }}
+          sonarqube_url: ${{ secrets.SONARQUBE_DEV_URL_V2 }}
+          sonarqube_token: ${{ secrets.SONARQUBE_DEV_TOKEN_V2 }}
           projectKey: ${{ github.event.repository.name }}
 
   build:
