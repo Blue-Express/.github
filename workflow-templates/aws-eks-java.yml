@@ -45,8 +45,6 @@ jobs:
          distribution: 'temurin'
      - name: Checkstyle
        run: mvn checkstyle:checkstyle -DskipTests
-    # - name: Sonarqube
-    #   run: mvn verify sonar:sonar -DskipTests -Dsonar.host.url=${{ secrets.SONARQUBE_DEV_URL }} -Dsonar.login=${{ secrets.SONARQUBE_DEV_TOKEN }}
      - name: SonarqubeV2
        env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
