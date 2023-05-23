@@ -77,7 +77,7 @@ jobs:
       ingress-groupname: ingrz-namespace              # Reemplazar {namespace} por el {name} del NS
       # Recursos Default
       cpu-base: '10m'
-      memory-base: '128Mi'
+      memory-base: '64Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
       replicas: '1'
