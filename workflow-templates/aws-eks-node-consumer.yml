@@ -51,8 +51,8 @@ jobs:
       liveness-timeoutSeconds: '20'
       # iamServiceAccount: default
       # Recursos Default
-      cpu-base: '30m'
-      memory-base: '128Mi'
+      cpu-base: '10m'
+      memory-base: '64Mi'
       cpu-limit: '400m'
       memory-limit: '500Mi'
       replicas: '1'
@@ -92,8 +92,8 @@ jobs:
       liveness-timeoutSeconds: '20'
       # iamServiceAccount: default
       # Recursos Default
-      cpu-base: '30m'
-      memory-base: '128Mi'
+      cpu-base: '10m'
+      memory-base: '64Mi'
       cpu-limit: '400m'
       memory-limit: '500Mi'
       replicas: '1'
@@ -133,8 +133,8 @@ jobs:
       liveness-timeoutSeconds: '20'
       # iamServiceAccount: default
       # Recursos Default
-      cpu-base: '30m'
-      memory-base: '128Mi'
+      cpu-base: '10m'
+      memory-base: '64Mi'
       cpu-limit: '400m'
       memory-limit: '500Mi'
       replicas: '1'
