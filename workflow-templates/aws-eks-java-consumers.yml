@@ -73,7 +73,7 @@ jobs:
       liveness-timeoutSeconds: '20'
       # Recursos Base
       cpu-base: '10m'
-      memory-base: '128Mi'
+      memory-base: '64Mi'
       # Límite Recursos Default
       cpu-limit: '350m'
       memory-limit: '380Mi'
@@ -116,7 +116,7 @@ jobs:
       liveness-periodoSeconds: '60'
       liveness-timeoutSeconds: '20'
       cpu-base: '10m'
-      memory-base: '128Mi'
+      memory-base: '64Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
     secrets:
@@ -145,7 +145,7 @@ jobs:
       liveness-periodoSeconds: '60'
       liveness-timeoutSeconds: '20'
       cpu-base: '10m'
-      memory-base: '128Mi'
+      memory-base: '64Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
     secrets:
