@@ -104,7 +104,7 @@ jobs:
     with:
       suffix: -retry-1
 #       cert-path: true
-      replicas: '1'
+#       replicas: '1'
       environment: ${{ github.ref_name }}
       namespace: ns-name                              # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr01.yml
@@ -148,7 +148,7 @@ jobs:
     with:
       suffix: -retry-2
 #       cert-path: true
-      replicas: '1'
+#       replicas: '1'
       environment: ${{ github.ref_name }}
       namespace: ns-name                               # Reemplazar al correspondiente
       path-values: helm/values-${{ github.ref_name }}-csmr02.yml
