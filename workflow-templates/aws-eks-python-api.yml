@@ -42,7 +42,7 @@ jobs:
       ingress-enabled: true
       ingress-groupname: ingrz-labs
       cpu-base: '10m'
-      memory-base: '128Mi'
+      memory-base: '64Mi'
       cpu-limit: '200m'
       memory-limit: '380Mi'
     secrets:
