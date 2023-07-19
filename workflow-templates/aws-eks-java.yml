@@ -121,7 +121,7 @@ jobs:
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
 
   api-mgnt:
-    uses: Blue-Express/bx_templates/.github/workflows/kong.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/kong-v2.yml@blue
     needs: deploy
     with:
       environment: ${{ github.ref_name }}
