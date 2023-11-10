@@ -54,3 +54,4 @@ jobs:
     uses: Blue-Express/bx_templates/.github/workflows/nodegroup-manage.yml@blue
     # Este workflow depende del job 'deploy'
     needs: deploy
+    
