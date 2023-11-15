@@ -1,4 +1,4 @@
-name: Template - Python SQS Consumer on AWS EKS
+name: Template - Python Consumer on AWS EKS
 
 on:
   push:
