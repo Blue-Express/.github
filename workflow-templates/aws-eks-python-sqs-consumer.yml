@@ -9,7 +9,7 @@ on:
 
 jobs:
   sonar:
-    uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-java.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-python.yml@blue
     secrets:
       SONARQUBE_DEV_URL: ${{ secrets.SONARQUBE_DEV_URL }}
       SONARQUBE_DEV_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN }}
@@ -44,29 +44,3 @@ jobs:
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS }}
       SECRETOS: ${{ toJSON(secrets) }}
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
-
-  create-sqs-and-send-message:
-    needs: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
-
-      - name: AWS Context
-        run: |
-          aws sts get-caller-identity > sts_output.json
-          export AWS_ACCOUNT_ID=$(jq -r '.Account' sts_output.json)
-          echo "AWS Account ID: $AWS_ACCOUNT_ID"
-
-      - name: Create AWS SQS Queue
-        run: aws sqs create-queue --queue-name my-queue --region us-east-2 --output json
-        id: create-sqs
-        env:
-          AWS_ACCOUNT_ID: ${{ env.AWS_ACCOUNT_ID }}
-
-      - name: Send message to SQS
-        run: aws sqs send-message --queue-url https://sqs.us-east-2.amazonaws.com/${{ env.AWS_ACCOUNT_ID }}/my-queue --message-body "Hello, SQS!"
