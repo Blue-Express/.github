@@ -28,7 +28,7 @@ jobs:
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
       
   deploy:
-    uses: Example-Express/bx_templates/.github/workflows/deploy-helm-python-api.ymll@blue
+    uses: Example-Express/bx_templates/.github/workflows/deploy-helm-python-api.yml@blue
     needs: build
     with:
       environment: ${{ github.ref_name }}
