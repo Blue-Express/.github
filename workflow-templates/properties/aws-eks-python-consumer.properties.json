@@ -1,0 +1,7 @@
+{
+    "name": "Deploy Python Consumer to Amazon EKS",
+    "description": "Deploy a Consumer to an Amazon EKS service powered by blue express.",
+    "creator": "blue express",
+    "iconName": "python",
+    "categories": ["Deployment", "Continuous integration", "Python", "Dockerfile"]
+}
