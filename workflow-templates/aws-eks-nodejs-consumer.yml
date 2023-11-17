@@ -31,9 +31,9 @@ jobs:
     needs: build
     with:
       environment: ${{ github.ref_name }}
-      namespace: ns-development
+      namespace: ns-development                              # Reemplazar al Correspondiente
       path-values: helm/values-${{ github.ref_name }}.yml
-      base-path: /api/development/v1    
+      base-path: /api/development/v1                         # Definir de acuerdo al live path de la aplicación   
       
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
