@@ -10,7 +10,7 @@ on:
 
 jobs:
   sonar:
-    uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-java.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-python.yml@blue
     secrets:
       SONARQUBE_DEV_URL: ${{ secrets.SONARQUBE_DEV_URL }}
       SONARQUBE_DEV_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN }}
