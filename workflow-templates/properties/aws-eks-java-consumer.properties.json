@@ -1,0 +1,7 @@
+{
+    "name": "Deploy Java Consumer to Amazon EKS",
+    "description": "Deploy a container to an Amazon EKS service powered by blue express.",
+    "creator": "blue express",
+    "iconName": "java",
+    "categories": ["Deployment", "Continuous integration", "Java" , "Dockerfile"]
+}
