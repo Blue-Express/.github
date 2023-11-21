@@ -11,8 +11,8 @@ jobs:
   sonar:
     uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-python.yml@blue
     secrets:
-      SONARQUBE_DEV_URL: ${{ secrets.SONARQUBE_DEV_URL }}
-      SONARQUBE_DEV_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN }}
+      SONARQUBE_DEV_URL_V2: ${{ secrets.SONARQUBE_DEV_URL_V2 }}
+      SONARQUBE_DEV_TOKEN_V2: ${{ secrets.SONARQUBE_DEV_TOKEN_V2 }}
       TOKEN_REPO_TEMPLATE: ${{ secrets.TOKEN_REPO_TEMPLATE }}
   
   build:
