@@ -1,0 +1,26 @@
+name: Central Slack Notifications
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches:
+      - production
+
+jobs:
+  pre_deploy:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Registro de Activación
+        run: echo "Activando pre-prod-notifications para PR ${GITHUB_EVENT_NUMBER} en el repositorio ${GITHUB_REPOSITORY} desde la rama ${GITHUB_HEAD_REF}"
+      - name: Ejecutar Pre-Deploy Notifications
+        uses: Blue-Express/bx_templates/.github/workflows/slack-pre-prod-notifications.yml@blue
+
+  post_deploy:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Registro de Activación
+        run: echo "Activando post-prod-notifications para PR ${GITHUB_EVENT_NUMBER} en el repositorio ${GITHUB_REPOSITORY} después de cerrar el PR en la rama ${GITHUB_HEAD_REF}"
+      - name: Ejecutar Post-Deploy Notifications
+        uses: Blue-Express/bx_templates/.github/workflows/slack-post-prod-notifications.yaml@blue
