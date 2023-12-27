@@ -26,16 +26,38 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY  }}
       AWS_REGION: ${{ secrets.AWS_REGION  }}
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
-      
+
   deploy:
-    uses: Example-Express/bx_templates/.github/workflows/deploy-helm-python-api.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/deploy-helm-python-api.yml@blue
     needs: build
     with:
+      # iamServiceAccount: agregar SA en caso de requerir
       environment: ${{ github.ref_name }}
-      namespace: ns-development                              # Reemplazar al Correspondiente
+      namespace: ns-{namespace}                              # Reemplazar al Correspondiente
       path-values: helm/values-${{ github.ref_name }}.yml
-      base-path: /api/development/v1                         # Definir de acuerdo al live path de la aplicación   
-      
+      base-path: /api/path/v1                         # Definir de acuerdo al live path de la aplicación   
+      liveness-path: /health/liveness
+      liveness-initialDelay: '180'
+      liveness-periodoSeconds: '45'
+      liveness-timeoutSeconds: '20'
+      # Recursos Default
+      cpu-base: '10m'
+      memory-base: '64Mi'
+      cpu-limit: '400m'
+      memory-limit: '500Mi'
+      replicas: '1'
+      # Límite Recursos Dev
+      cpu-limit-dev: '200m'
+      memory-limit-dev: '380Mi'
+      replicas-dev: '1'
+      # Límite Recursos Qa
+      cpu-limit-qa: '400m'
+      memory-limit-qa: '380Mi'
+      replicas-qa: '1'
+      # Límite Recursos Prod
+      cpu-limit-prod: '400m'
+      memory-limit-prod: '380Mi'
+      replicas-prod: '3'
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -44,3 +66,4 @@ jobs:
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS }}
       SECRETOS: ${{ toJSON(secrets) }}
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
+ 
