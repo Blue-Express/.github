@@ -9,14 +9,23 @@ on:
 
 jobs:
   sonar:
-    uses: Blue-Express/bx_templates/.github/workflows/pr-sonar-node.yml@blue
-    secrets:
-      SONARQUBE_DEV_URL: ${{ secrets.SONARQUBE_DEV_URL }}
-      SONARQUBE_DEV_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN }}
-      TOKEN_REPO_TEMPLATE: ${{ secrets.TOKEN_REPO_TEMPLATE }}
+    runs-on: ubuntu-latest
+    environment:
+      name: 'development'
+      url: https://desa-sonar.bluex.cl/dashboard?id=${{ github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: SonarQube Scan
+        uses: Blue-Express/sonar-scan-action@master
+
+        id: check
+        with:
+          sonarqube_url: ${{ secrets.SONARQUBE_DEV_URL }}
+          sonarqube_token: ${{ secrets.SONARQUBE_DEV_TOKEN }}
+          projectKey: ${{ github.event.repository.name }}
   
   build:
-    uses: Example-Express/bx_templates/.github/workflows/build-and-push-nodejs.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/build-and-push-nodejs.yml@blue
     needs: sonar
     with:
       environment: ${{ github.ref_name }}
@@ -27,7 +36,7 @@ jobs:
       AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
       
   deploy:
-    uses: Example-Express/bx_templates/.github/workflows/deploy-helm-node-api.yml@blue
+    uses: Blue-Express/bx_templates/.github/workflows/deploy-helm-node-api.yml@blue
     needs: build
     with:
       # iamServiceAccount:            # Habilitar y agregar de ser necesario
