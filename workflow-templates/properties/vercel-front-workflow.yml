@@ -1,0 +1,112 @@
+name: Development - Vercel Deploy
+
+on:
+  push:
+    branches: [development, staging, production]
+    paths-ignore:
+      - '.github/workflows/**'
+  workflow_dispatch:
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SonarQube Scan
+        if: github.ref_name == 'development'
+        uses: Blue-Express/sonar-scan-action@master
+        id: check
+        with:
+          sonarqube_url: ${{ secrets.SONARQUBE_DEV_URL }}
+          sonarqube_token: ${{ secrets.SONARQUBE_DEV_TOKEN }}
+          projectKey: ${{ github.event.repository.name }}
+
+  import-to-vercel:
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'development'
+    steps:
+      - name: Import to Vercel
+        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --confirm --scope blueexpress
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_TEAM_BLUEXPRESS_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+  vercel:
+    runs-on: ubuntu-latest
+    name: Deploy app
+    needs: import-to-vercel
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          registry-url: https://registry.npmjs.org/
+      - name: Deploy to Vercel
+        run: VERCEL_ORG_ID=${VERCEL_ORG_ID} VERCEL_PROJECT_ID=${VERCEL_PROJECT_ID} npx vercel -t ${VERCEL_TOKEN} ${{ github.ref_name == 'production' && '--prod' || '' }} --build-env BX_ENV=${{ github.ref_name }} --build-env NPM_TOKEN=${{ secrets.NPM_TOKEN }} --scope blueexpress -m githubCommitSha=${{ github.sha }} -m githubCommitAuthorName=${{ github.actor }} -m githubCommitAuthorLogin=${{ github.actor }} -m githubDeployment=1 -m githubOrg=${{ github.repository_owner}} -m githubRepo=${{ github.event.repository.name }} -m githubCommitOrg=${{ github.repository_owner}} -m githubCommitRepo=${{ github.event.repository.name }} -m githubCommitMessage="${{ github.event.head_commit.message }}" -m githubCommitRef=${{ github.ref_name }} --yes --force
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_TEAM_BLUEXPRESS_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+  create-tag-and-release:
+    runs-on: ubuntu-latest
+    needs: [sonar, vercel]
+    if: github.ref_name == 'development'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Set GitHub Credential
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Bump package version
+        run: npm version patch
+
+      - name: Get current version
+        id: get-version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "::set-output name=current_version::$CURRENT_VERSION"
+
+      - name: Push changes to branch
+        run: git push
+
+      - name: Install hub
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hub
+
+      - name: Create tag and release
+        id: create-release
+        run: |
+          git push origin "v${{ steps.get-version.outputs.current_version }}"
+          hub release create -m "Release ${{ steps.get-version.outputs.current_version }}" -t "generate-npm-package" "v${{ steps.get-version.outputs.current_version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  npm-publish:
+    runs-on: ubuntu-latest
+    needs: create-tag-and-release
+    if: github.event_name == 'workflow_run' && github.event.workflow == 'Create Tag and Release' && github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: 'https://npm.pkg.github.com/'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GHP_REPO_TOKEN }}
