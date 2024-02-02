@@ -1,0 +1,7 @@
+{
+    "name": "Testeando crear un template",
+    "description": "Test.",
+    "creator": "blue express",
+    "iconName": "github",
+    "categories": ["Deployment", "Workflow", "Github" , "Dockerfile", "Artifact"]
+}
