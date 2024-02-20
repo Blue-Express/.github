@@ -9,41 +9,36 @@ on:
   workflow_dispatch:
 
 jobs:
-  sonar:
+  sonar-scan:
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v3
-     - name: Set up JDK 17
-       uses: actions/setup-java@v3
-       with:
-         java-version: '17' # The JDK version to make available on the path.
-         java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
-         architecture: x64
-         distribution: 'temurin'
-     - name: Checkstyle
-       run: mvn checkstyle:checkstyle -DskipTests
-     - name: SonarqubeV2
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-         SONAR_TOKEN: ${{ secrets.SONARQUBE_DEV_TOKEN_V2 }}
-         SONAR_HOST_URL: ${{ secrets.SONARQUBE_DEV_URL_V2 }}
-       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=${{ github.event.repository.name }}
-     - name: Read value from Properties-file check Quality Gate
-       id: read_property
-       uses: christian-draeger/read-properties@1.0.1
-       with:
-         path: './target/sonar/report-task.txt'
-         property: 'ceTaskId'
-     - name: Show ceTaskId
-       run: echo ${{ steps.read_property.outputs.value }}
-     - name: Show Github ref
-       run: echo ${{ github.ref }}
-     - name: Break Build Quality Gate
-       run: sh ./break_build.sh ${{ secrets.SONARQUBE_DEV_URL_V2 }} ${{ secrets.SONARQUBE_DEV_TOKEN_V2 }} ${{ steps.read_property.outputs.value }}
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarQube Scan Workflow for Java
+        uses: Blue-Express/bx-templates/sonarqube-scan-java@blue
+        with:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_V3 }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL_V3 }}
+          java-version: '17'      # Allowed versions: "17", "21".
+          build-system: 'maven'   # Allowed values: "maven", "gradle".
+          coverage-tool: 'jacoco' # Allowed values: "jacoco".
+          sonarVervose: 'false'   # Optional. Default: "false".
+          sonarExclusions: ''     # Optional. Example: '**/entities/*.java,**/entity/*.java,**/dto/*.java'
+          coverageExclusions: ''  # Optional.
+  sonar-url:
+    needs: sonar-scan
+    runs-on: ubuntu-latest
+    environment:
+      name: "sonar"
+      url: https://sonarqube.infra.blue.cl/dashboard?id=${{ github.event.repository.name }}
+    steps:
+      - name: Información de SonarQube
+        run: echo "El análisis de SonarQube se ha completado."
 
   build:
     uses: Blue-Express/bx_templates/.github/workflows/build-java17.yml@blue
-    needs: sonar
+    needs: sonar-scan
     # with:
       # install-pkg: "maven"
 
