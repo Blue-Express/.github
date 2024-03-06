@@ -19,6 +19,7 @@ jobs:
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          project-key: ${{ github.event.repository.name }}
           python-version: '3.12'    # 3.12 o latest, según corresponda.
           test-framework: 'pytest'  # pytest o 'unittest', según corresponda.
           sonarVerbose: 'false'     # Optional. Default: "false".

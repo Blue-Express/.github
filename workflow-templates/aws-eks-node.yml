@@ -43,12 +43,13 @@ jobs:
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_V3 }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL_V3 }}
-          node-version: '18'        # 18 o '20', según corresponda
+          project-key: ${{ github.event.repository.name }}
+          node-version: '20'        # 18 o '20', según corresponda
           package-manager: 'npm'    # npm o 'yarn', según corresponda 
           test-framework: 'jest'    # jest o 'mocha', según corresponda
           sonarVervose: 'false'     # Optional. Default: "false".
-          sonarExclusions: ''       # Optional.
-          coverageExclusions: ''    # Optional.
+          sonarExclusions: ''       # Opcional: especifica archivos o carpetas a excluir.
+          coverageExclusions: ''    # Opcional: especifica archivos o carpetas a excluir de la cobertura.
   sonar-url:
     needs: sonar-scan
     if: always()

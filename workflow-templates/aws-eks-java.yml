@@ -43,12 +43,13 @@ jobs:
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_V3 }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL_V3 }}
-          java-version: '17'      # Allowed versions: "17", "21".
+          project-key: ${{ github.event.repository.name }}
+          java-version: '21'      # Allowed versions: "17", "21".
           build-system: 'maven'   # Allowed values: "maven", "gradle".
           coverage-tool: 'jacoco' # Allowed values: "jacoco".
           sonarVervose: 'false'   # Optional. Default: "false".
-          sonarExclusions: ''     # Optional. Example: '**/entities/*.java,**/entity/*.java,**/dto/*.java'
-          coverageExclusions: ''  # Optional.
+          sonarExclusions: ''     # Opcional: especifica archivos o carpetas a excluir. 
+          coverageExclusions: ''  # Opcional: especifica archivos o carpetas a excluir de la cobertura. Example: '**/entities/*.java,**/entity/*.java,**/dto/*.java'.
   sonar-url:
     needs: sonar-scan
     runs-on: ubuntu-latest
