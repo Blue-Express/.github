@@ -1,0 +1,7 @@
+{
+    "name": "Deploy NodeJS Consumer to Amazon EKS",
+    "description": "Deploy Consumer to an Amazon EKS service powered by blue express.",
+    "creator": "blue express",
+    "iconName": "node",
+    "categories": ["Deployment", "Continuous integration", "NodeJS"]
+}
