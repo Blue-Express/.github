@@ -63,7 +63,6 @@ jobs:
       liveness-initialDelay: '180'
       liveness-periodoSeconds: '45'
       liveness-timeoutSeconds: '20'
-      # iamServiceAccount: default
       # Recursos Default
       cpu-base: '10m'
       memory-base: '64Mi'
