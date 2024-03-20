@@ -58,7 +58,8 @@ jobs:
     secrets:
       GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       GCP_CLUSTER_ID: ${{ secrets.GCP_CLUSTER_ID }}
-      GCP_LOCATION: ${{ secrets.GCP_LOCATION }}
+      GCP_REGION: ${{ secrets.GCP_REGION }}
+      GCP_ZONE: ${{ secrets.GCP_ZONE }}
       
   deploy:
     uses: Blue-Express/bx-templates/.github/workflows/deploy-helm-node-api-gcp.yml@blue
