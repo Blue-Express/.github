@@ -1,0 +1,7 @@
+{
+    "name": "Deploy NodeJS to GCP GKE",
+    "description": "Deploy a container to an Google cloud GKE service powered by blue express.",
+    "creator": "blue express",
+    "iconName": "node",
+    "categories": ["Deployment", "Continuous integration", "JavaScript" , "Dockerfile"]
+}
