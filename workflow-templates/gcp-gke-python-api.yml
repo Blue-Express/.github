@@ -45,13 +45,15 @@ jobs:
       cpu-limit: '200m'
       memory-limit: '380Mi'
     secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      AWS_KUBECONFIG: ${{ secrets.AWS_KUBECONFIG }}
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS }}
       SECRETOS: ${{ toJSON(secrets) }}
-      AWS_ASSUME_ROLE: ${{ secrets.AWS_ASSUME_ROLE }}
+      GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      GCP_CLUSTER_ID: ${{ secrets.GCP_CLUSTER_ID }}
+      GCP_REGION: ${{ secrets.GCP_REGION }}
+      GCP_ZONE: ${{ secrets.GCP_ZONE }}
+      GCP_WIF_PROJECT_ID: ${{ secrets.GCP_WIF_PROJECT_ID }}
+      GCP_WIF: ${{ secrets.GCP_WIF }}
+
 
   # api-mgnt:
   #   uses: Blue-Express/bx_templates/.github/workflows/kong.yml@blue
