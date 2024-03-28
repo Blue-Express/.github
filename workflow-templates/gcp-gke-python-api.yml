@@ -31,20 +31,35 @@ jobs:
     uses: Blue-Express/bx-templates/.github/workflows/deploy-helm-python-gcp.yml@blue
     needs: build-and-push-ecr
     with:
+      # iamServiceAccount: sa-gke-<subdominio>
       environment: ${{ github.ref_name }}
       namespace: ns-labs
       path-values: helm/values-${{ github.ref_name }}.yml
-      base-path: /api/python/v1/sample
+      base-path: /api/python/v1/sample  # cambiar
       liveness-path: /health/liveness
       liveness-initialDelay: '10'
       liveness-periodoSeconds: '5'
       liveness-timeoutSeconds: '15'
-      ingress-enabled: true
-      ingress-groupname: ingrz-labs
+      ingress-enabled: false    # ver si aplica
+      ingress-groupname: ingrz-labs # cambiar
+      # Recursos Default
       cpu-base: '10m'
       memory-base: '64Mi'
-      cpu-limit: '200m'
-      memory-limit: '380Mi'
+      cpu-limit: '400m'
+      memory-limit: '500Mi'
+      replicas: '1'
+      # Límite Recursos Dev
+      cpu-limit-dev: '200m'
+      memory-limit-dev: '380Mi'
+      replicas-dev: '1'
+      # Límite Recursos Qa
+      cpu-limit-qa: '400m'
+      memory-limit-qa: '380Mi'
+      replicas-qa: '1'
+      # Límite Recursos Prod
+      cpu-limit-prod: '400m'
+      memory-limit-prod: '380Mi'
+      replicas-prod: '3'
     secrets:
       TOKEN_REPO_TEMPLATE: ${{ secrets.REPO_HELM_ACCESS }}
       SECRETOS: ${{ toJSON(secrets) }}
