@@ -27,6 +27,7 @@ jobs:
       GCP_WIF_PROJECT_ID: ${{ secrets.GCP_WIF_PROJECT_ID }}
       GCP_WIF: ${{ secrets.GCP_WIF }}
 
+
   deploy:
     uses: Blue-Express/bx-templates/.github/workflows/deploy-helm-python-gcp.yml@blue
     needs: build-and-push-ecr
