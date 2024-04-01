@@ -36,7 +36,7 @@ jobs:
       environment: ${{ github.ref_name }}
       namespace: ns-{namespace}              # cambiar
       path-values: helm/values-${{ github.ref_name }}.yml
-      base-path: /api/python/v1/sample  # cambiar
+      base-path: /api/{subdopmain}/{api}/v1  # cambiar
       liveness-path: /health/liveness
       liveness-initialDelay: '10'
       liveness-periodoSeconds: '5'
