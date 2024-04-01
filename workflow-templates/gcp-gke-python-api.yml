@@ -34,7 +34,7 @@ jobs:
     with:
       # iamServiceAccount: sa-gke-<subdominio>
       environment: ${{ github.ref_name }}
-      namespace: ns-labs
+      namespace: ns-{namespace}              # cambiar
       path-values: helm/values-${{ github.ref_name }}.yml
       base-path: /api/python/v1/sample  # cambiar
       liveness-path: /health/liveness
@@ -42,7 +42,7 @@ jobs:
       liveness-periodoSeconds: '5'
       liveness-timeoutSeconds: '15'
       ingress-enabled: false    # ver si aplica
-      ingress-groupname: ingrz-labs # cambiar
+      ingress-groupname: ingrz-{namespace} # cambiar
       # Recursos Default
       cpu-base: '10m'
       memory-base: '64Mi'

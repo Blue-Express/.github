@@ -1,5 +1,5 @@
 {
-    "name": "Deploy Python API on GKE",
+    "name": "Deploy Python API on GCP GKE",
     "description": "Deploy Python API (Flask) on EKS.",
     "creator": "blue express",
     "iconName": "python",
